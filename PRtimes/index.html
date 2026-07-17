@@ -1,0 +1,60 @@
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+
+<!-- ---------- GA4タグ（同期版） ---------- -->
+<script src="https://www.googletagmanager.com/gtag/js?id=G-M5FHJ3J8GH"></script>
+<script>
+  /* ===== 転送先（PR TIMES） ===== */
+  var TARGET = 'https://prtimes.jp/main/html/rd/p/000000005.000153682.html';
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  /* ① page_view を送り、送信後にコールバックで遷移 */
+  gtag('config', 'G-M5FHJ3J8GH', {
+    send_page_view: true,
+    event_callback: () => {
+      setTimeout(jump, 200);
+    }
+  });
+
+  /* ② Measurement Protocol もバックアップ送信 */
+  fetch('https://www.google-analytics.com/mp/collect?measurement_id=G-M5FHJ3J8GH&api_secret=OsizzBwKSe-JRhVofkF5JQ', {
+    method:'POST', keepalive:true,
+    body:JSON.stringify({
+      client_id: crypto.randomUUID(),
+      events:[{
+        name:'click_redirect',
+        params:{
+          campaign:'prtimes_202507',
+          source:'mailmagazine',
+          medium:'email',
+          content:'prtimes_000000005_000153682'
+        }
+      }]
+    })
+  });
+
+  /* ③ 2秒経っても callback が来ない場合のフォールバック */
+  setTimeout(jump, 2000);
+
+  var jumped = false;
+  function jump(){
+    if (jumped) return;
+    jumped = true;
+    window.location.href = TARGET;
+  }
+</script>
+
+<!-- JS 無効環境向け -->
+<noscript>
+<meta http-equiv="refresh" content="2;url=https://prtimes.jp/main/html/rd/p/000000005.000153682.html">
+</noscript>
+
+<title>ページへ転送しています…</title>
+<style>body{display:flex;height:100vh;align-items:center;justify-content:center;font-family:sans-serif;text-align:center;margin:0}</style>
+</head><body>
+<p>ページを読み込み中です。<br>自動的に移動しない場合は <a href="https://prtimes.jp/main/html/rd/p/000000005.000153682.html">こちら</a> をクリックしてください。</p>
+</body></html>
